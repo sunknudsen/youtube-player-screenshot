@@ -1,0 +1,55 @@
+{
+  "name": "youtube-player-screenshot",
+  "version": "0.0.1",
+  "description": "Capture a YouTube player screenshot as a PNG file and, optionally, generate markdown code for it.",
+  "engines": {
+    "node": ">=10.17.0"
+  },
+  "bin": {
+    "youtube-player-screenshot": "./bin/youtube-player-screenshot.js"
+  },
+  "main": "build/index.js",
+  "dependencies": {
+    "@sindresorhus/slugify": "^1.0.0",
+    "chalk": "^4.1.0",
+    "clipboardy": "^2.3.0",
+    "commander": "^5.1.0",
+    "puppeteer": "^4.0.0"
+  },
+  "scripts": {
+    "start": "node build/index.js",
+    "code": "tsc -w",
+    "build": "rm -fr build/*; tsc",
+    "ncu": "ncu -u"
+  },
+  "author": "Sun Knudsen <hello@sunknudsen.com>",
+  "license": "MIT",
+  "keywords": [
+    "cli",
+    "youtube",
+    "player",
+    "screenshot",
+    "png"
+  ],
+  "devDependencies": {
+    "@types/node": "^14.0.13",
+    "@types/puppeteer": "^3.0.0",
+    "npm-check-updates": "^7.0.1",
+    "typescript": "^3.9.5"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/sunknudsen/youtube-player-screenshot.git"
+  },
+  "bugs": {
+    "url": "https://github.com/sunknudsen/youtube-player-screenshot/issues"
+  },
+  "homepage": "https://github.com/sunknudsen/youtube-player-screenshot#readme",
+  "prettier": {
+    "endOfLine": "lf",
+    "printWidth": 80,
+    "semi": false,
+    "tabWidth": 2,
+    "trailingComma": "es5"
+  }
+}
