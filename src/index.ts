@@ -21,7 +21,7 @@ const capture = async function () {
   let match: RegExpMatchArray
   if (
     !(match = program.url.match(
-      /^https:\/\/www\.youtube\.com\/watch\?v=(\w+)(&t=(\d+))?$/
+      /^https:\/\/www\.youtube\.com\/watch\?v=([\w-]+)(&t=(\d+))?$/
     ))
   ) {
     console.error(

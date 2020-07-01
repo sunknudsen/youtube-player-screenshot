@@ -20,7 +20,7 @@ commander_1.default
 commander_1.default.parse(process.argv);
 const capture = async function () {
     let match;
-    if (!(match = commander_1.default.url.match(/^https:\/\/www\.youtube\.com\/watch\?v=(\w+)(&t=(\d+))?$/))) {
+    if (!(match = commander_1.default.url.match(/^https:\/\/www\.youtube\.com\/watch\?v=([\w-]+)(&t=(\d+))?$/))) {
         console.error(chalk_1.default.red("Invalid URL, expected format is https://www.youtube.com/watch?v=b9aMJZjZ4pw&t=0"));
         process.exit(1);
     }
