@@ -2,7 +2,7 @@
 
 ## Capture a YouTube player screenshot as a PNG file and, optionally, generate markdown code for it.
 
-This project was developed to make embedding what appears to be a clickable YouTube players (like the one bellow) effortless and scriptable.
+This project was developed to make embedding what appears to be clickable YouTube players (like the one bellow) effortless and scriptable.
 
 [![How to create a Signal account without using your personal phone number - YouTube](how-to-create-a-signal-account-without-using-your-personal-phone-number.png)](https://www.youtube.com/watch?v=b9aMJZjZ4pw "How to create a Signal account without using your personal phone number - YouTube")
 
