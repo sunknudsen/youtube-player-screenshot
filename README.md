@@ -16,12 +16,12 @@ This project was developed to make embedding what appears to be clickable YouTub
 ## Installation
 
 ```shell
-$ npm install youtube-player-screenshot -g
+npm install youtube-player-screenshot -g
 ```
 
 ## Usage
 
-```shell
+```console
 $ youtube-player-screenshot -h
 Usage: youtube-player-screenshot [options]
 
@@ -42,14 +42,14 @@ Options:
 
 ## Example
 
-```shell
+```console
 $ youtube-player-screenshot --url "https://www.youtube.com/watch?v=b9aMJZjZ4pw" --privacy --clipboard --stdout
 [![How to create a Signal account without using your personal phone number - YouTube](how-to-create-a-signal-account-without-using-your-personal-phone-number.png)](https://www.youtube.com/watch?v=b9aMJZjZ4pw "How to create a Signal account without using your personal phone number - YouTube")
 ```
 
 Markdown copied to clipboard 👍
 
-```shell
+```console
 $ file /Users/sunknudsen/Desktop/how-to-create-a-signal-account-without-using-your-personal-phone-number.png
 /Users/sunknudsen/Desktop/how-to-create-a-signal-account-without-using-your-personal-phone-number.png: PNG image data, 1360 x 764, 8-bit/color RGBA, non-interlaced
 ```
