@@ -17,7 +17,7 @@ program
   .option("--stdout", "output markdown to stdout")
 program.parse(process.argv)
 
-const capture = async function () {
+const run = async function () {
   let match: RegExpMatchArray
   if (
     !(match = program.url.match(
@@ -64,4 +64,4 @@ const capture = async function () {
   }
 }
 
-capture()
+run()

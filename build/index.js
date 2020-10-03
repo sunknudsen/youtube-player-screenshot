@@ -18,7 +18,7 @@ commander_1.default
     .option("--clipboard", "copy markdown to clipboard")
     .option("--stdout", "output markdown to stdout");
 commander_1.default.parse(process.argv);
-const capture = async function () {
+const run = async function () {
     let match;
     if (!(match = commander_1.default.url.match(/^https:\/\/www\.youtube\.com\/watch\?v=([\w-]+)(&t=(\d+))?$/))) {
         console.error(chalk_1.default.red("Invalid URL, expected format is https://www.youtube.com/watch?v=b9aMJZjZ4pw&t=0"));
@@ -52,5 +52,5 @@ const capture = async function () {
         await clipboardy_1.default.write(markdown);
     }
 };
-capture();
+run();
 //# sourceMappingURL=index.js.map

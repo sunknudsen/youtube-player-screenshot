@@ -1,6 +1,6 @@
 {
   "name": "youtube-player-screenshot",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "Capture a YouTube player screenshot as a PNG file and, optionally, generate markdown code for it.",
   "engines": {
     "node": ">=10.17.0"
@@ -13,8 +13,8 @@
     "@sindresorhus/slugify": "^1.1.0",
     "chalk": "^4.1.0",
     "clipboardy": "^2.3.0",
-    "commander": "^6.0.0",
-    "puppeteer": "^5.2.1"
+    "commander": "^6.1.0",
+    "puppeteer": "^5.3.1"
   },
   "scripts": {
     "start": "node build/index.js",
@@ -32,10 +32,10 @@
     "png"
   ],
   "devDependencies": {
-    "@types/node": "^14.0.24",
-    "@types/puppeteer": "^3.0.1",
-    "npm-check-updates": "^7.0.2",
-    "typescript": "^3.9.7"
+    "@types/node": "^14.11.2",
+    "@types/puppeteer": "^3.0.2",
+    "npm-check-updates": "^9.0.3",
+    "typescript": "^4.0.3"
   },
   "repository": {
     "type": "git",
