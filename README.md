@@ -4,7 +4,7 @@
 
 This project was developed to make embedding what appears to be clickable YouTube players (like the one bellow) effortless and scriptable.
 
-[![How to create a Signal account without using your personal phone number - YouTube](how-to-create-a-signal-account-without-using-your-personal-phone-number.png)](https://www.youtube.com/watch?v=b9aMJZjZ4pw "How to create a Signal account without using your personal phone number - YouTube")
+[![How to create Signal account without using personal phone number - YouTube](how-to-create-signal-account-without-using-personal-phone-number.png)](https://www.youtube.com/watch?v=b9aMJZjZ4pw "How to create Signal account without using personal phone number - YouTube")
 
 ## Features
 
@@ -44,12 +44,12 @@ Options:
 
 ```console
 $ youtube-player-screenshot --url "https://www.youtube.com/watch?v=b9aMJZjZ4pw" --privacy --clipboard --stdout
-[![How to create a Signal account without using your personal phone number - YouTube](how-to-create-a-signal-account-without-using-your-personal-phone-number.png)](https://www.youtube.com/watch?v=b9aMJZjZ4pw "How to create a Signal account without using your personal phone number - YouTube")
+[![How to create Signal account without using personal phone number - YouTube](how-to-create-signal-account-without-using-personal-phone-number.png)](https://www.youtube.com/watch?v=b9aMJZjZ4pw "How to create Signal account without using personal phone number - YouTube")
 ```
 
 Markdown copied to clipboard 👍
 
 ```console
-$ file /Users/sunknudsen/Desktop/how-to-create-a-signal-account-without-using-your-personal-phone-number.png
-/Users/sunknudsen/Desktop/how-to-create-a-signal-account-without-using-your-personal-phone-number.png: PNG image data, 1360 x 764, 8-bit/color RGBA, non-interlaced
+$ file how-to-create-signal-account-without-using-personal-phone-number.png
+how-to-create-signal-account-without-using-personal-phone-number.png: PNG image data, 1360 x 764, 8-bit/color RGBA, non-interlaced
 ```
