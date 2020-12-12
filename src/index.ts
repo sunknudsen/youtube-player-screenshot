@@ -39,7 +39,7 @@ const run = async function () {
 
   const browser = await puppeteer.launch()
   const page = await browser.newPage()
-  await page.goto(`https://${domain}/embed/${videoId}?rel=0`, {
+  await page.goto(`https://${domain}/embed/${videoId}?rel=0&modestbranding=1`, {
     waitUntil: "networkidle0",
   })
   await page.setViewport({
