@@ -22,6 +22,8 @@ npm install youtube-player-screenshot -g
 ## Usage
 
 ```console
+$ cd /Users/sunknudsen/Desktop
+
 $ youtube-player-screenshot -h
 Usage: youtube-player-screenshot [options]
 
@@ -43,6 +45,8 @@ Options:
 ## Example
 
 ```console
+$ cd /Users/sunknudsen/Desktop
+
 $ youtube-player-screenshot --url "https://www.youtube.com/watch?v=b9aMJZjZ4pw" --privacy --clipboard --stdout
 [![How to create Signal account without using personal phone number - YouTube](how-to-create-signal-account-without-using-personal-phone-number.png)](https://www.youtube.com/watch?v=b9aMJZjZ4pw "How to create Signal account without using personal phone number - YouTube")
 ```
@@ -50,6 +54,8 @@ $ youtube-player-screenshot --url "https://www.youtube.com/watch?v=b9aMJZjZ4pw" 
 Markdown copied to clipboard 👍
 
 ```console
+$ cd /Users/sunknudsen/Desktop
+
 $ file how-to-create-signal-account-without-using-personal-phone-number.png
 how-to-create-signal-account-without-using-personal-phone-number.png: PNG image data, 1360 x 764, 8-bit/color RGBA, non-interlaced
 ```

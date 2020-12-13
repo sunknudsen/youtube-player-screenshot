@@ -39,14 +39,21 @@ const run = async function () {
 
   const browser = await puppeteer.launch()
   const page = await browser.newPage()
-  await page.goto(`https://${domain}/embed/${videoId}?rel=0&modestbranding=1`, {
-    waitUntil: "networkidle0",
-  })
   await page.setViewport({
     width: parseInt(program.width),
     height: parseInt(program.height),
     deviceScaleFactor: 2,
   })
+  await page.goto(`https://${domain}/embed/${videoId}?modestbranding=1&rel=0`, {
+    waitUntil: "networkidle0",
+  })
+  // Remove "Watch as YouTube"
+  await page.evaluate((selector) => {
+    const nodes = document.querySelectorAll(selector)
+    for (let node of nodes) {
+      node.parentNode.removeChild(node)
+    }
+  }, ".ytp-impression-link")
   const pageTitle = await page.title()
   const filename = `${slugify(pageTitle.replace(/ \- YouTube$/, ""), {
     decamelize: false,
