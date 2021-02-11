@@ -9,6 +9,11 @@
     "youtube-player-screenshot": "./bin/youtube-player-screenshot.js"
   },
   "main": "build/index.js",
+  "files": [
+    "build/",
+    "LICENCE",
+    "README.md"
+  ],
   "dependencies": {
     "@sindresorhus/slugify": "^1.1.0",
     "chalk": "^4.1.0",
