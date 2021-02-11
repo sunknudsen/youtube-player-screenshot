@@ -31,9 +31,9 @@ const run = async function () {
     // Bridge browser console to Node (used while developing package)
     // page.on("console", (message) => console.log("Page log:", message))
     await page.setViewport({
-        width: parseInt(commander_1.default.width),
-        height: parseInt(commander_1.default.height),
-        deviceScaleFactor: 1,
+        width: parseInt(commander_1.default.width) / 2,
+        height: parseInt(commander_1.default.height) / 2,
+        deviceScaleFactor: 2,
     });
     await page.goto(`https://${domain}/embed/${videoId}?modestbranding=1&rel=0`, {
         waitUntil: "networkidle0",

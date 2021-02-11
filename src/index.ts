@@ -44,9 +44,9 @@ const run = async function () {
   // page.on("console", (message) => console.log("Page log:", message))
 
   await page.setViewport({
-    width: parseInt(program.width),
-    height: parseInt(program.height),
-    deviceScaleFactor: 1,
+    width: parseInt(program.width) / 2,
+    height: parseInt(program.height) / 2,
+    deviceScaleFactor: 2,
   })
 
   await page.goto(`https://${domain}/embed/${videoId}?modestbranding=1&rel=0`, {
