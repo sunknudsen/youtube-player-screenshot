@@ -9,8 +9,8 @@ import clipboardy from "clipboardy"
 
 program
   .requiredOption("--url <url>", "YouTube URL")
-  .option("--width <width>", "screenshot width", "680")
-  .option("--height <height>", "screenshot height", "382")
+  .option("--width <width>", "screenshot width", "1920")
+  .option("--height <height>", "screenshot height", "1080")
   .option("--output <output>", "output folder", process.cwd())
   .option("--privacy", "use privacy-enhanced mode")
   .option("--clipboard", "copy markdown to clipboard")
@@ -39,25 +39,42 @@ const run = async function () {
 
   const browser = await puppeteer.launch()
   const page = await browser.newPage()
+
+  // Bridge browser console to Node (used while developing package)
+  // page.on("console", (message) => console.log("Page log:", message))
+
   await page.setViewport({
     width: parseInt(program.width),
     height: parseInt(program.height),
-    deviceScaleFactor: 2,
+    deviceScaleFactor: 1,
   })
+
   await page.goto(`https://${domain}/embed/${videoId}?modestbranding=1&rel=0`, {
     waitUntil: "networkidle0",
   })
+
   // Remove "Watch as YouTube"
   await page.evaluate((selector) => {
-    const nodes = document.querySelectorAll(selector)
-    for (let node of nodes) {
+    const node = document.querySelector(selector)
+    if (node) {
       node.parentNode.removeChild(node)
     }
   }, ".ytp-impression-link")
-  const pageTitle = await page.title()
-  const filename = `${slugify(pageTitle.replace(/ \- YouTube$/, ""), {
+
+  // Find video title
+  const pageTitle = await page.evaluate((selector) => {
+    const node = document.querySelector(selector)
+    return node.innerText
+  }, ".ytp-title-link")
+
+  if (!pageTitle) {
+    throw new Error("Could not find video title")
+  }
+
+  const filename = `${slugify(pageTitle, {
     decamelize: false,
   })}.png`
+
   await page.screenshot({
     path: path.resolve(program.output, filename),
   })

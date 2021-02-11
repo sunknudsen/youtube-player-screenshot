@@ -10,7 +10,7 @@ This project was developed to make embedding what appears to be clickable YouTub
 
 - Super simple to use
 - Uses trusted dependencies ([chalk](https://www.npmjs.com/package/chalk), [clipboardy](https://www.npmjs.com/package/clipboardy), [puppeteer](https://www.npmjs.com/package/puppeteer), etc...)
-- Very light codebase to audit
+- Very light codebase to audit (less than 100 lines)
 - Written in TypeScript
 
 ## Installation
@@ -29,16 +29,14 @@ Usage: youtube-player-screenshot [options]
 
 Options:
   --url <url>        YouTube URL
-  --width <width>    screenshot width (default: "680")
-  --height <height>  screenshot height (default: "382")
+  --width <width>    screenshot width (default: "1920")
+  --height <height>  screenshot height (default: "1080")
   --output <output>  output folder (default: "/Users/sunknudsen/Desktop")
   --privacy          use privacy-enhanced mode
   --clipboard        copy markdown to clipboard
   --stdout           output markdown to stdout
   -h, --help         display help for command
 ```
-
-`--width` and `--height` are doubled to generate high-DPI screenshots.
 
 `--output` defaults to folder in which `youtube-player-screenshot` is executed.
 
@@ -54,8 +52,6 @@ $ youtube-player-screenshot --url "https://www.youtube.com/watch?v=b9aMJZjZ4pw" 
 Markdown copied to clipboard 👍
 
 ```console
-$ cd /Users/sunknudsen/Desktop
-
 $ file how-to-create-signal-account-without-using-personal-phone-number.png
-how-to-create-signal-account-without-using-personal-phone-number.png: PNG image data, 1360 x 764, 8-bit/color RGBA, non-interlaced
+how-to-create-signal-account-without-using-personal-phone-number.png: PNG image data, 1920 x 1080, 8-bit/color RGBA, non-interlaced
 ```

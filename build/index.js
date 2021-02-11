@@ -11,8 +11,8 @@ const slugify_1 = __importDefault(require("@sindresorhus/slugify"));
 const clipboardy_1 = __importDefault(require("clipboardy"));
 commander_1.default
     .requiredOption("--url <url>", "YouTube URL")
-    .option("--width <width>", "screenshot width", "680")
-    .option("--height <height>", "screenshot height", "382")
+    .option("--width <width>", "screenshot width", "1920")
+    .option("--height <height>", "screenshot height", "1080")
     .option("--output <output>", "output folder", process.cwd())
     .option("--privacy", "use privacy-enhanced mode")
     .option("--clipboard", "copy markdown to clipboard")
@@ -28,23 +28,32 @@ const run = async function () {
     const videoId = match[1];
     const browser = await puppeteer_1.default.launch();
     const page = await browser.newPage();
+    // Bridge browser console to Node (used while developing package)
+    // page.on("console", (message) => console.log("Page log:", message))
     await page.setViewport({
         width: parseInt(commander_1.default.width),
         height: parseInt(commander_1.default.height),
-        deviceScaleFactor: 2,
+        deviceScaleFactor: 1,
     });
     await page.goto(`https://${domain}/embed/${videoId}?modestbranding=1&rel=0`, {
         waitUntil: "networkidle0",
     });
     // Remove "Watch as YouTube"
     await page.evaluate((selector) => {
-        const nodes = document.querySelectorAll(selector);
-        for (let node of nodes) {
+        const node = document.querySelector(selector);
+        if (node) {
             node.parentNode.removeChild(node);
         }
     }, ".ytp-impression-link");
-    const pageTitle = await page.title();
-    const filename = `${slugify_1.default(pageTitle.replace(/ \- YouTube$/, ""), {
+    // Find video title
+    const pageTitle = await page.evaluate((selector) => {
+        const node = document.querySelector(selector);
+        return node.innerText;
+    }, ".ytp-title-link");
+    if (!pageTitle) {
+        throw new Error("Could not find video title");
+    }
+    const filename = `${slugify_1.default(pageTitle, {
         decamelize: false,
     })}.png`;
     await page.screenshot({
