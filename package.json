@@ -24,9 +24,9 @@
     "puppeteer": "^7.1.0"
   },
   "scripts": {
-    "start": "node build/index.js",
     "code": "tsc -w",
     "build": "rm -fr build/*; tsc",
+    "prepublishOnly": "npm run build",
     "ncu": "ncu -u"
   },
   "author": "Sun Knudsen <hello@sunknudsen.com>",
