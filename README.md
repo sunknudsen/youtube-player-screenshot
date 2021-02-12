@@ -1,6 +1,6 @@
 # youtube-player-screenshot
 
-## Capture a YouTube player screenshot as a PNG file and, optionally, generate markdown code for it.
+## Capture YouTube player screenshot and, optionally, generate markdown code for it.
 
 This project was developed to make embedding what appears to be clickable YouTube players (like the one bellow) effortless and scriptable.
 

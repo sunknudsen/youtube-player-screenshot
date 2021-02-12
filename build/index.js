@@ -1,16 +1,43 @@
 "use strict";
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
+    Object.defineProperty(o, "default", { enumerable: true, value: v });
+}) : function(o, v) {
+    o["default"] = v;
+});
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    __setModuleDefault(result, mod);
+    return result;
+};
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const commander_1 = __importDefault(require("commander"));
+const commander_1 = __importStar(require("commander"));
 const path_1 = __importDefault(require("path"));
-const chalk_1 = __importDefault(require("chalk"));
 const puppeteer_1 = __importDefault(require("puppeteer"));
 const slugify_1 = __importDefault(require("@sindresorhus/slugify"));
 const clipboardy_1 = __importDefault(require("clipboardy"));
+const youtubeUrlRegExp = new RegExp(/^https:\/\/www\.youtube\.com\/watch\?v=([\w-]+)(&t=(\d+))?$/);
+const parseUrl = function (value) {
+    if (!value.match(youtubeUrlRegExp)) {
+        throw new commander_1.InvalidOptionArgumentError("Invalid URL");
+    }
+    return value;
+};
 commander_1.default
-    .requiredOption("--url <url>", "YouTube URL")
+    .addOption(new commander_1.Option("--url <url>", "YouTube URL")
+    .argParser(parseUrl)
+    .makeOptionMandatory(true))
     .option("--width <width>", "screenshot width", "1920")
     .option("--height <height>", "screenshot height", "1080")
     .option("--output <output>", "output folder", process.cwd())
@@ -18,21 +45,17 @@ commander_1.default
     .option("--clipboard", "copy markdown to clipboard")
     .option("--stdout", "output markdown to stdout");
 commander_1.default.parse(process.argv);
+const options = commander_1.default.opts();
 const run = async function () {
-    let match;
-    if (!(match = commander_1.default.url.match(/^https:\/\/www\.youtube\.com\/watch\?v=([\w-]+)(&t=(\d+))?$/))) {
-        console.error(chalk_1.default.red("Invalid URL, expected format is https://www.youtube.com/watch?v=b9aMJZjZ4pw&t=0"));
-        process.exit(1);
-    }
-    const domain = commander_1.default.privacy === true ? "www.youtube-nocookie.com" : "www.youtube.com";
-    const videoId = match[1];
+    const domain = options.privacy === true ? "www.youtube-nocookie.com" : "www.youtube.com";
+    const videoId = options.url.match(youtubeUrlRegExp)[1];
     const browser = await puppeteer_1.default.launch();
     const page = await browser.newPage();
     // Bridge browser console to Node (used while developing package)
     // page.on("console", (message) => console.log("Page log:", message))
     await page.setViewport({
-        width: parseInt(commander_1.default.width) / 2,
-        height: parseInt(commander_1.default.height) / 2,
+        width: parseInt(options.width) / 2,
+        height: parseInt(options.height) / 2,
         deviceScaleFactor: 2,
     });
     await page.goto(`https://${domain}/embed/${videoId}?modestbranding=1&rel=0`, {
@@ -57,14 +80,14 @@ const run = async function () {
         decamelize: false,
     })}.png`;
     await page.screenshot({
-        path: path_1.default.resolve(commander_1.default.output, filename),
+        path: path_1.default.resolve(options.output, filename),
     });
     await browser.close();
-    const markdown = `[![${pageTitle}](${filename})](${commander_1.default.url} "${pageTitle}")`;
-    if (commander_1.default.stdout) {
-        console.log(markdown);
+    const markdown = `[![${pageTitle}](${filename})](${options.url} "${pageTitle}")`;
+    if (options.stdout) {
+        console.info(markdown);
     }
-    if (commander_1.default.clipboard) {
+    if (options.clipboard) {
         await clipboardy_1.default.write(markdown);
     }
 };

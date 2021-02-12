@@ -1,14 +1,31 @@
 "use strict"
 
-import program from "commander"
+import program, {
+  Option as CommanderOption,
+  InvalidOptionArgumentError as CommanderInvalidOptionError,
+} from "commander"
 import path from "path"
-import chalk from "chalk"
 import puppeteer from "puppeteer"
 import slugify from "@sindresorhus/slugify"
 import clipboardy from "clipboardy"
 
+const youtubeUrlRegExp = new RegExp(
+  /^https:\/\/www\.youtube\.com\/watch\?v=([\w-]+)(&t=(\d+))?$/
+)
+
+const parseUrl = function (value: string) {
+  if (!value.match(youtubeUrlRegExp)) {
+    throw new CommanderInvalidOptionError("Invalid URL")
+  }
+  return value
+}
+
 program
-  .requiredOption("--url <url>", "YouTube URL")
+  .addOption(
+    new CommanderOption("--url <url>", "YouTube URL")
+      .argParser(parseUrl)
+      .makeOptionMandatory(true)
+  )
   .option("--width <width>", "screenshot width", "1920")
   .option("--height <height>", "screenshot height", "1080")
   .option("--output <output>", "output folder", process.cwd())
@@ -17,25 +34,12 @@ program
   .option("--stdout", "output markdown to stdout")
 program.parse(process.argv)
 
+const options = program.opts()
+
 const run = async function () {
-  let match: RegExpMatchArray
-  if (
-    !(match = program.url.match(
-      /^https:\/\/www\.youtube\.com\/watch\?v=([\w-]+)(&t=(\d+))?$/
-    ))
-  ) {
-    console.error(
-      chalk.red(
-        "Invalid URL, expected format is https://www.youtube.com/watch?v=b9aMJZjZ4pw&t=0"
-      )
-    )
-    process.exit(1)
-  }
-
   const domain =
-    program.privacy === true ? "www.youtube-nocookie.com" : "www.youtube.com"
-
-  const videoId = match[1]
+    options.privacy === true ? "www.youtube-nocookie.com" : "www.youtube.com"
+  const videoId = options.url.match(youtubeUrlRegExp)[1]
 
   const browser = await puppeteer.launch()
   const page = await browser.newPage()
@@ -44,8 +48,8 @@ const run = async function () {
   // page.on("console", (message) => console.log("Page log:", message))
 
   await page.setViewport({
-    width: parseInt(program.width) / 2,
-    height: parseInt(program.height) / 2,
+    width: parseInt(options.width) / 2,
+    height: parseInt(options.height) / 2,
     deviceScaleFactor: 2,
   })
 
@@ -76,14 +80,14 @@ const run = async function () {
   })}.png`
 
   await page.screenshot({
-    path: path.resolve(program.output, filename),
+    path: path.resolve(options.output, filename),
   })
   await browser.close()
-  const markdown = `[![${pageTitle}](${filename})](${program.url} "${pageTitle}")`
-  if (program.stdout) {
-    console.log(markdown)
+  const markdown = `[![${pageTitle}](${filename})](${options.url} "${pageTitle}")`
+  if (options.stdout) {
+    console.info(markdown)
   }
-  if (program.clipboard) {
+  if (options.clipboard) {
     await clipboardy.write(markdown)
   }
 }
