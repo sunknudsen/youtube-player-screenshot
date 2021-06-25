@@ -47,48 +47,55 @@ commander_1.default
 commander_1.default.parse(process.argv);
 const options = commander_1.default.opts();
 const run = async function () {
-    const domain = options.privacy === true ? "www.youtube-nocookie.com" : "www.youtube.com";
-    const videoId = options.url.match(youtubeUrlRegExp)[1];
-    const browser = await puppeteer_1.default.launch();
-    const page = await browser.newPage();
-    // Bridge browser console to Node (used while developing package)
-    // page.on("console", (message) => console.log("Page log:", message))
-    await page.setViewport({
-        width: parseInt(options.width) / 2,
-        height: parseInt(options.height) / 2,
-        deviceScaleFactor: 2,
-    });
-    await page.goto(`https://${domain}/embed/${videoId}?modestbranding=1&rel=0`, {
-        waitUntil: "networkidle0",
-    });
-    // Remove "Watch as YouTube"
-    await page.evaluate((selector) => {
-        const node = document.querySelector(selector);
-        if (node) {
-            node.parentNode.removeChild(node);
+    try {
+        const domain = options.privacy === true ? "www.youtube-nocookie.com" : "www.youtube.com";
+        const videoId = options.url.match(youtubeUrlRegExp)[1];
+        const browser = await puppeteer_1.default.launch();
+        const page = await browser.newPage();
+        // Bridge browser console to Node (used while developing package)
+        // page.on("console", (message) => console.log("Page log:", message))
+        await page.setViewport({
+            width: parseInt(options.width) / 2,
+            height: parseInt(options.height) / 2,
+            deviceScaleFactor: 2,
+        });
+        console.log(`https://${domain}/embed/${videoId}?modestbranding=1&rel=0`);
+        await page.goto(`https://${domain}/embed/${videoId}?modestbranding=1&rel=0`, {
+            waitUntil: "networkidle0",
+        });
+        // Remove "Watch as YouTube"
+        await page.evaluate((selector) => {
+            const node = document.querySelector(selector);
+            if (node) {
+                node.parentNode.removeChild(node);
+            }
+        }, ".ytp-impression-link");
+        // Find video title
+        const pageTitle = await page.evaluate((selector) => {
+            const node = document.querySelector(selector);
+            return node.innerText;
+        }, ".ytp-title-link");
+        if (!pageTitle) {
+            throw new Error("Could not find video title");
         }
-    }, ".ytp-impression-link");
-    // Find video title
-    const pageTitle = await page.evaluate((selector) => {
-        const node = document.querySelector(selector);
-        return node.innerText;
-    }, ".ytp-title-link");
-    if (!pageTitle) {
-        throw new Error("Could not find video title");
+        const filename = `${slugify_1.default(pageTitle, {
+            decamelize: false,
+        })}.png`;
+        await page.screenshot({
+            path: path_1.default.resolve(options.output, filename),
+        });
+        await browser.close();
+        const markdown = `[![${pageTitle}](${filename})](${options.url} "${pageTitle}")`;
+        if (options.stdout) {
+            console.info(markdown);
+        }
+        if (options.clipboard) {
+            await clipboardy_1.default.write(markdown);
+        }
     }
-    const filename = `${slugify_1.default(pageTitle, {
-        decamelize: false,
-    })}.png`;
-    await page.screenshot({
-        path: path_1.default.resolve(options.output, filename),
-    });
-    await browser.close();
-    const markdown = `[![${pageTitle}](${filename})](${options.url} "${pageTitle}")`;
-    if (options.stdout) {
-        console.info(markdown);
-    }
-    if (options.clipboard) {
-        await clipboardy_1.default.write(markdown);
+    catch (error) {
+        console.error(error);
+        process.exit(1);
     }
 };
 run();
