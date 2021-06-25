@@ -54,8 +54,6 @@ const run = async function () {
       deviceScaleFactor: 2,
     })
 
-    console.log(`https://${domain}/embed/${videoId}?modestbranding=1&rel=0`)
-
     await page.goto(
       `https://${domain}/embed/${videoId}?modestbranding=1&rel=0`,
       {
