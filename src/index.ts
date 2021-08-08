@@ -1,6 +1,7 @@
 "use strict"
 
-import program, {
+import {
+  program,
   Option as CommanderOption,
   InvalidOptionArgumentError as CommanderInvalidOptionError,
 } from "commander"
