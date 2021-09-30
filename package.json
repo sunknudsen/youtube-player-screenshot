@@ -1,6 +1,6 @@
 {
   "name": "youtube-player-screenshot",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "description": "Capture YouTube player screenshot and, optionally, generate markdown code for it.",
   "engines": {
     "node": ">=10.23.2"
@@ -17,17 +17,17 @@
     "README.md"
   ],
   "dependencies": {
-    "@sindresorhus/slugify": "^1.1.0",
+    "@sindresorhus/slugify": "^1.1.2",
     "chalk": "^4.1.2",
     "clipboardy": "^2.3.0",
-    "commander": "^8.1.0",
-    "puppeteer": "^10.2.0"
+    "commander": "^8.2.0",
+    "puppeteer": "^10.4.0"
   },
   "scripts": {
     "code": "tsc -w",
     "build": "rm -fr build/*; tsc",
     "prepublishOnly": "npm run build",
-    "ncu": "ncu -u -x @sindresorhus/slugify"
+    "ncu": "ncu --target minor --upgrade"
   },
   "author": "Sun Knudsen <hello@sunknudsen.com>",
   "license": "MIT",
@@ -39,10 +39,10 @@
     "png"
   ],
   "devDependencies": {
-    "@types/node": "^16.4.13",
+    "@types/node": "^16.10.2",
     "@types/puppeteer": "^5.4.4",
-    "npm-check-updates": "^11.8.3",
-    "typescript": "^4.3.5"
+    "npm-check-updates": "^11.8.5",
+    "typescript": "^4.4.3"
   },
   "repository": {
     "type": "git",

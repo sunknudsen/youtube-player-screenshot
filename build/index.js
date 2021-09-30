@@ -58,7 +58,7 @@ const run = async function () {
         if (!pageTitle) {
             throw new Error("Could not find video title");
         }
-        const filename = `${slugify_1.default(pageTitle, {
+        const filename = `${(0, slugify_1.default)(pageTitle, {
             decamelize: false,
         })}.png`;
         await page.screenshot({
