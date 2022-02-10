@@ -3,7 +3,7 @@
 import {
   program,
   Option as CommanderOption,
-  InvalidOptionArgumentError as CommanderInvalidOptionError,
+  InvalidArgumentError as CommanderInvalidArgumentError,
 } from "commander"
 import path from "path"
 import puppeteer from "puppeteer"
@@ -16,7 +16,7 @@ const youtubeUrlRegExp = new RegExp(
 
 const parseUrl = function (value: string) {
   if (!value.match(youtubeUrlRegExp)) {
-    throw new CommanderInvalidOptionError("Invalid URL")
+    throw new CommanderInvalidArgumentError("Invalid URL")
   }
   return value
 }

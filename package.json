@@ -1,14 +1,15 @@
 {
   "name": "youtube-player-screenshot",
-  "version": "0.1.6",
+  "version": "0.2.0",
   "description": "Capture YouTube player screenshot and, optionally, generate markdown code for it.",
   "engines": {
-    "node": ">=10.23.2"
+    "node": "^12.20.0 || ^14.13.1 || >=16.0.0"
   },
   "bin": {
     "youtube-player-screenshot": "./bin/youtube-player-screenshot.js"
   },
-  "main": "build/index.js",
+  "type": "module",
+  "exports": "./build/index.js",
   "files": [
     "bin/",
     "build/",
@@ -17,11 +18,11 @@
     "README.md"
   ],
   "dependencies": {
-    "@sindresorhus/slugify": "^1.1.2",
-    "chalk": "^4.1.2",
-    "clipboardy": "^2.3.0",
-    "commander": "^8.2.0",
-    "puppeteer": "^10.4.0"
+    "@sindresorhus/slugify": "^2.1.0",
+    "chalk": "^5.0.0",
+    "clipboardy": "^3.0.0",
+    "commander": "^9.0.0",
+    "puppeteer": "^13.3.1"
   },
   "scripts": {
     "code": "tsc -w",
@@ -39,10 +40,10 @@
     "png"
   ],
   "devDependencies": {
-    "@types/node": "^16.10.2",
+    "@types/node": "^17.0.17",
     "@types/puppeteer": "^5.4.4",
-    "npm-check-updates": "^11.8.5",
-    "typescript": "^4.4.3"
+    "npm-check-updates": "^12.3.0",
+    "typescript": "^4.5.5"
   },
   "repository": {
     "type": "git",

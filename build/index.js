@@ -1,22 +1,18 @@
 "use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-const commander_1 = require("commander");
-const path_1 = __importDefault(require("path"));
-const puppeteer_1 = __importDefault(require("puppeteer"));
-const slugify_1 = __importDefault(require("@sindresorhus/slugify"));
-const clipboardy_1 = __importDefault(require("clipboardy"));
+import { program, Option as CommanderOption, InvalidArgumentError as CommanderInvalidArgumentError, } from "commander";
+import path from "path";
+import puppeteer from "puppeteer";
+import slugify from "@sindresorhus/slugify";
+import clipboardy from "clipboardy";
 const youtubeUrlRegExp = new RegExp(/^https:\/\/www\.youtube\.com\/watch\?v=([\w-]+)(&t=(\d+))?$/);
 const parseUrl = function (value) {
     if (!value.match(youtubeUrlRegExp)) {
-        throw new commander_1.InvalidOptionArgumentError("Invalid URL");
+        throw new CommanderInvalidArgumentError("Invalid URL");
     }
     return value;
 };
-commander_1.program
-    .addOption(new commander_1.Option("--url <url>", "YouTube URL")
+program
+    .addOption(new CommanderOption("--url <url>", "YouTube URL")
     .argParser(parseUrl)
     .makeOptionMandatory(true))
     .option("--width <width>", "screenshot width", "1920")
@@ -25,13 +21,13 @@ commander_1.program
     .option("--privacy", "use privacy-enhanced mode")
     .option("--clipboard", "copy markdown to clipboard")
     .option("--stdout", "output markdown to stdout");
-commander_1.program.parse(process.argv);
-const options = commander_1.program.opts();
+program.parse(process.argv);
+const options = program.opts();
 const run = async function () {
     try {
         const domain = options.privacy === true ? "www.youtube-nocookie.com" : "www.youtube.com";
         const videoId = options.url.match(youtubeUrlRegExp)[1];
-        const browser = await puppeteer_1.default.launch();
+        const browser = await puppeteer.launch();
         const page = await browser.newPage();
         // Bridge browser console to Node (used while developing package)
         // page.on("console", (message) => console.log("Page log:", message))
@@ -58,11 +54,11 @@ const run = async function () {
         if (!pageTitle) {
             throw new Error("Could not find video title");
         }
-        const filename = `${(0, slugify_1.default)(pageTitle, {
+        const filename = `${slugify(pageTitle, {
             decamelize: false,
         })}.png`;
         await page.screenshot({
-            path: path_1.default.resolve(options.output, filename),
+            path: path.resolve(options.output, filename),
         });
         await browser.close();
         const markdown = `[![${pageTitle}](${filename})](${options.url} "${pageTitle}")`;
@@ -70,7 +66,7 @@ const run = async function () {
             console.info(markdown);
         }
         if (options.clipboard) {
-            await clipboardy_1.default.write(markdown);
+            await clipboardy.write(markdown);
         }
     }
     catch (error) {
