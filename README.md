@@ -31,7 +31,8 @@ Options:
   --url <url>        YouTube URL
   --width <width>    screenshot width (default: "1920")
   --height <height>  screenshot height (default: "1080")
-  --output <output>  output folder (default: "/Users/sunknudsen/Desktop")
+  --type <type>      screenshot type (choices: "jpeg", "png", default: "png")
+  --output <output>  output folder (default: "/Users/sunknudsen/Code/sunknudsen/youtube-player-screenshot")
   --privacy          use privacy-enhanced mode
   --clipboard        copy markdown to clipboard
   --stdout           output markdown to stdout

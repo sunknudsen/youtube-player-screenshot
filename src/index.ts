@@ -29,10 +29,16 @@ program
   )
   .option("--width <width>", "screenshot width", "1920")
   .option("--height <height>", "screenshot height", "1080")
+  .addOption(
+    new CommanderOption("--type <type>", "screenshot type")
+      .choices(["jpeg", "png"])
+      .default("png")
+  )
   .option("--output <output>", "output folder", process.cwd())
-  .option("--privacy", "use privacy-enhanced mode")
+  .option("--privacy", "use privacy-conscious mode")
   .option("--clipboard", "copy markdown to clipboard")
   .option("--stdout", "output markdown to stdout")
+
 program.parse(process.argv)
 
 const options = program.opts()
@@ -62,7 +68,7 @@ const run = async function () {
       }
     )
 
-    // Remove "Watch as YouTube"
+    // Remove "Watch on YouTube"
     await page.evaluate((selector) => {
       const node = document.querySelector(selector)
       if (node) {
@@ -82,10 +88,11 @@ const run = async function () {
 
     const filename = `${slugify(pageTitle, {
       decamelize: false,
-    })}.png`
+    })}.${options.type}`
 
     await page.screenshot({
       path: path.resolve(options.output, filename),
+      type: options.type,
     })
     await browser.close()
     const markdown = `[![${pageTitle}](${filename})](${options.url} "${pageTitle}")`
