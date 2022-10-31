@@ -52,8 +52,11 @@ const run = async function () {
     const browser = await puppeteer.launch()
     const page = await browser.newPage()
 
-    // Bridge browser console to Node (used while developing package)
-    // page.on("console", (message) => console.log("Page log:", message))
+    // Bridge page console to Node (used while developing package)
+    // See https://pptr.dev/guides/debugging#capture-console-output
+    // page.on("console", (msg) => {
+    //   console.log(`Page console.${msg.type()}`, msg.text())
+    // })
 
     await page.setViewport({
       width: parseInt(options.width) / 2,
@@ -79,7 +82,7 @@ const run = async function () {
     // Find video title
     const pageTitle = await page.evaluate((selector) => {
       const node = document.querySelector(selector)
-      return node.innerText
+      return node.textContent
     }, ".ytp-title-link")
 
     if (!pageTitle) {
