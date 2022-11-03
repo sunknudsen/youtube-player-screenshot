@@ -47,7 +47,7 @@ Options:
 $ cd /Users/sunknudsen/Desktop
 
 $ youtube-player-screenshot --url "https://www.youtube.com/watch?v=b9aMJZjZ4pw" --privacy --clipboard --stdout
-[![How to create Signal account without using personal phone number - YouTube](how-to-create-signal-account-without-using-personal-phone-number.png)](https://www.youtube.com/watch?v=b9aMJZjZ4pw "How to create Signal account without using personal phone number - YouTube")
+[![How to create Signal account without using personal phone number](how-to-create-signal-account-without-using-personal-phone-number.png)](https://www.youtube.com/watch?v=b9aMJZjZ4pw "How to create Signal account without using personal phone number")
 ```
 
 Markdown copied to clipboard 👍
