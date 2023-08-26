@@ -29,6 +29,7 @@ program
   )
   .option("--width <width>", "screenshot width", "1920")
   .option("--height <height>", "screenshot height", "1080")
+  .option("--scale <scale>", "scale factor", "2")
   .addOption(
     new CommanderOption("--type <type>", "screenshot type")
       .choices(["jpeg", "png"])
@@ -59,9 +60,9 @@ const run = async function () {
     // })
 
     await page.setViewport({
-      width: parseInt(options.width) / 2,
-      height: parseInt(options.height) / 2,
-      deviceScaleFactor: 2,
+      width: parseFloat(options.width) / parseFloat(options.scale),
+      height: parseFloat(options.height) / parseFloat(options.scale),
+      deviceScaleFactor: parseFloat(options.scale),
     })
 
     await page.goto(

@@ -1,6 +1,6 @@
 {
   "name": "youtube-player-screenshot",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "description": "Capture YouTube player screenshot and, optionally, generate markdown code for it.",
   "engines": {
     "node": ">=14.16"
