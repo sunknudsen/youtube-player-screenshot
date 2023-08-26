@@ -91,7 +91,7 @@ const run = async function () {
 
     const filename = `${slugify(pageTitle, {
       decamelize: false,
-    })}.${options.type}`
+    })}.${options.type === "jpeg" ? "jpg" : "png"}`
 
     await page.screenshot({
       path: path.resolve(options.output, filename),
