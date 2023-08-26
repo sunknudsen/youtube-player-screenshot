@@ -1,6 +1,6 @@
 {
   "name": "youtube-player-screenshot",
-  "version": "0.3.2",
+  "version": "0.4.0",
   "description": "Capture YouTube player screenshot and, optionally, generate markdown code for it.",
   "engines": {
     "node": ">=14.16"
@@ -18,11 +18,11 @@
     "README.md"
   ],
   "dependencies": {
-    "@sindresorhus/slugify": "^2.1.1",
-    "chalk": "^5.1.2",
+    "@sindresorhus/slugify": "^2.2.1",
+    "chalk": "^5.3.0",
     "clipboardy": "^3.0.0",
-    "commander": "^9.4.1",
-    "puppeteer": "^19.2.2"
+    "commander": "^11.0.0",
+    "puppeteer": "^21.1.0"
   },
   "scripts": {
     "code": "tsc -w",
@@ -40,10 +40,10 @@
     "png"
   ],
   "devDependencies": {
-    "@types/node": "^18.11.9",
+    "@types/node": "^20.5.6",
     "@types/puppeteer": "^5.4.7",
-    "npm-check-updates": "^16.3.16",
-    "typescript": "^4.8.4"
+    "npm-check-updates": "^16.13.1",
+    "typescript": "^5.2.2"
   },
   "repository": {
     "type": "git",
