@@ -28,15 +28,18 @@ $ youtube-player-screenshot -h
 Usage: youtube-player-screenshot [options]
 
 Options:
-  --url <url>        YouTube URL
-  --width <width>    screenshot width (default: "1920")
-  --height <height>  screenshot height (default: "1080")
-  --type <type>      screenshot type (choices: "jpeg", "png", default: "png")
-  --output <output>  output folder (default: "/Users/sunknudsen/Code/sunknudsen/youtube-player-screenshot")
-  --privacy          use privacy-enhanced mode
-  --clipboard        copy markdown to clipboard
-  --stdout           output markdown to stdout
-  -h, --help         display help for command
+  --url <url>            YouTube URL
+  --width <width>        screenshot width (default: "1920")
+  --height <height>      screenshot height (default: "1080")
+  --scale <scale>        scale factor (default: "2")
+  --type <type>          screenshot type (choices: "jpeg", "png", default: "png")
+  --output <output>      output folder (default:
+                         "/Users/sunknudsen/Code/sunknudsen/youtube-player-screenshot")
+  --filename <filename>  filename (example: "b9aMJZjZ4pw.png")
+  --privacy              enable privacy-conscious mode
+  --clipboard            copy markdown to clipboard
+  --stdout               output markdown to stdout
+  -h, --help             display help for command
 ```
 
 `--output` defaults to folder in which `youtube-player-screenshot` is executed.
@@ -46,7 +49,7 @@ Options:
 ```console
 $ cd /Users/sunknudsen/Desktop
 
-$ youtube-player-screenshot --url "https://www.youtube.com/watch?v=b9aMJZjZ4pw" --privacy --clipboard --stdout
+$ youtube-player-screenshot --url "https://www.youtube.com/watch?v=b9aMJZjZ4pw" --scale 3 --privacy --clipboard --stdout
 [![How to create Signal account without using personal phone number](how-to-create-signal-account-without-using-personal-phone-number.png)](https://www.youtube.com/watch?v=b9aMJZjZ4pw "How to create Signal account without using personal phone number")
 ```
 

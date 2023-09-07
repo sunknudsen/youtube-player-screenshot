@@ -36,7 +36,8 @@ program
       .default("png")
   )
   .option("--output <output>", "output folder", process.cwd())
-  .option("--privacy", "use privacy-conscious mode")
+  .option("--filename <filename>", 'filename (example: "b9aMJZjZ4pw.png")')
+  .option("--privacy", "enable privacy-conscious mode")
   .option("--clipboard", "copy markdown to clipboard")
   .option("--stdout", "output markdown to stdout")
 
@@ -90,9 +91,11 @@ const run = async function () {
       throw new Error("Could not find video title")
     }
 
-    const filename = `${slugify(pageTitle, {
-      decamelize: false,
-    })}.${options.type === "jpeg" ? "jpg" : "png"}`
+    const filename =
+      options.filename ??
+      `${slugify(pageTitle, {
+        decamelize: false,
+      })}.${options.type === "jpeg" ? "jpg" : "png"}`
 
     await page.screenshot({
       path: path.resolve(options.output, filename),
