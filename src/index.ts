@@ -51,7 +51,7 @@ const run = async function () {
       options.privacy === true ? "www.youtube-nocookie.com" : "www.youtube.com"
     const videoId = options.url.match(youtubeUrlRegExp)[1]
 
-    const browser = await puppeteer.launch({ headless: "new" })
+    const browser = await puppeteer.launch({ headless: true })
     const page = await browser.newPage()
 
     // Bridge page console to Node (used while developing package)

@@ -33,8 +33,7 @@ Options:
   --height <height>      screenshot height (default: "1080")
   --scale <scale>        scale factor (default: "2")
   --type <type>          screenshot type (choices: "jpeg", "png", default: "png")
-  --output <output>      output folder (default:
-                         "/Users/sunknudsen/Code/sunknudsen/youtube-player-screenshot")
+  --output <output>      output folder (default: "/Users/sunknudsen/Code/sunknudsen/youtube-player-screenshot")
   --filename <filename>  filename (example: "b9aMJZjZ4pw.png")
   --privacy              enable privacy-conscious mode
   --clipboard            copy markdown to clipboard
@@ -57,5 +56,5 @@ Markdown copied to clipboard 👍
 
 ```console
 $ file how-to-create-signal-account-without-using-personal-phone-number.png
-how-to-create-signal-account-without-using-personal-phone-number.png: PNG image data, 1920 x 1080, 8-bit/color RGBA, non-interlaced
+how-to-create-signal-account-without-using-personal-phone-number.png: PNG image data, 1920 x 1080, 8-bit/color RGB, non-interlaced
 ```
