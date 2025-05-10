@@ -3,7 +3,7 @@
   "version": "0.4.4",
   "description": "Capture YouTube player screenshot and, optionally, generate markdown code for it.",
   "engines": {
-    "node": ">=14.16"
+    "node": ">=18"
   },
   "bin": {
     "youtube-player-screenshot": "./bin/youtube-player-screenshot.js"
