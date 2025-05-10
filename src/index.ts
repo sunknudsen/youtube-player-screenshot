@@ -1,14 +1,12 @@
-"use strict"
-
+import slugify from "@sindresorhus/slugify"
+import clipboardy from "clipboardy"
 import {
-  program,
-  Option as CommanderOption,
   InvalidArgumentError as CommanderInvalidArgumentError,
+  Option as CommanderOption,
+  program,
 } from "commander"
 import path from "path"
 import puppeteer from "puppeteer"
-import slugify from "@sindresorhus/slugify"
-import clipboardy from "clipboardy"
 
 const youtubeUrlRegExp = new RegExp(
   /^https:\/\/www\.youtube\.com\/watch\?v=([\w-]+)(&t=(\d+))?$/
