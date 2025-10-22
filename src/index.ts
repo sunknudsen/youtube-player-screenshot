@@ -93,14 +93,19 @@ const run = async function () {
       options.filename ??
       `${slugify(pageTitle, {
         decamelize: false,
-      })}.${options.type === "jpeg" ? "jpg" : "png"}`
+      })}.${options.type === "jpeg" ? "jpeg" : "png"}`
 
     await page.screenshot({
-      path: path.resolve(options.output, filename),
+      path: path.resolve(options.output, filename) as
+        | `${string}.jpeg`
+        | `${string}.png`,
       type: options.type,
     })
+
     await browser.close()
+
     const markdown = `[![${pageTitle}](${filename})](${options.url} "${pageTitle}")`
+
     if (options.stdout) {
       console.info(markdown)
     }
